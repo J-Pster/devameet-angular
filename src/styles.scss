@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/fonts/fonts.scss';
+@import './assets/styles/vars.scss';
+
+:root {
+  --fontRegular: 'Biennale Regular', sans-serif;
+  --fontBold: 'Biennale Bold', sans-serif;
+  --fontLight: 'Biennale Light', sans-serif;
+
+  --primaria01: #3BD42D;
+  --primaria02: #5E49FF;
+  --primaria03: #25CBD3;
+  --primaria04: #F0F5FF;
+
+  --branco: #FFFFFF;
+  --cinza01: #DADADA;
+  --cinza02: #7C7786;
+  --cinza03: #4D4C4D;
+  --cinza04: #333333;
+  --cinza00: #F4F4F4;
+
+  --selecao: #FD4343;
+  --vermelho: #FF0000;
+}
+
+* {
+  font-family: var(--fontRegular);
+  font-size: 14px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+
+// Breakpoints
+
+.desktop {
+  display: none;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: block;
+  }
+}
+
+.mobile {
+  display: block;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: none !important;
+  }
+}
