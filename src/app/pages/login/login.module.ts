@@ -5,6 +5,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { SharedPagesModule } from 'src/app/shared/pages/shared-pages.module';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,6 +14,7 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     LoginRoutingModule,
     SharedPagesModule,
     SharedComponentsModule,
+    MatSnackBarModule,
   ],
   exports: [LoginComponent],
 })

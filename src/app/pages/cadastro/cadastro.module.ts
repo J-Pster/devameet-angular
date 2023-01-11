@@ -5,6 +5,7 @@ import { CadastroRoutingModule } from './cadastro-routing.module';
 import { CadastroComponent } from './cadastro.component';
 import { SharedPagesModule } from 'src/app/shared/pages/shared-pages.module';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [CadastroComponent],
@@ -13,6 +14,7 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     CadastroRoutingModule,
     SharedPagesModule,
     SharedComponentsModule,
+    MatSnackBarModule,
   ],
   exports: [CadastroComponent],
 })

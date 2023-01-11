@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import {
 })
 export class LoginComponent {
   public form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
     this.form = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -26,12 +27,18 @@ export class LoginComponent {
 
   public async aoSubmeter() {
     if (this.form.invalid) {
-      alert('Preencha todos os campos corretamente!');
+      this._snackBar.open('Preencha todos os campos corretamente!', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top',
+      });
       return;
     }
 
     try {
-      alert('Entrando!');
+      this._snackBar.open('Logando!', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top',
+      });
     } catch (error) {}
   }
 }

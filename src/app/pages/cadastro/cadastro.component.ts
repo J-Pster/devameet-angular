@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { confirmPassVal } from 'src/app/shared/validators/confirm-pass.validator';
 
 @Component({
@@ -14,7 +15,7 @@ import { confirmPassVal } from 'src/app/shared/validators/confirm-pass.validator
 })
 export class CadastroComponent {
   public form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -29,12 +30,18 @@ export class CadastroComponent {
 
   public async aoSubmeter() {
     if (this.form.invalid) {
-      alert('Preencha todos os campos corretamente!');
+      this._snackBar.open('Preencha todos os campos corretamente!', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top',
+      });
       return;
     }
 
     try {
-      alert('Cadastrando!');
+      this._snackBar.open('Cadastrando!', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top',
+      });
     } catch (error) {}
   }
 }
