@@ -1,0 +1,45 @@
+@import '/src/assets/styles/vars.scss';
+
+@mixin botaoPrimario {
+    color: var(--branco);
+    background-color: var(--primaria03);
+}
+
+@mixin botaoOutline {
+    background-color: var(--branco);
+    color: var(--primaria03);
+    border: 1px solid var(--primaria03);
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &.primaria {
+        @include botaoPrimario;
+
+        &:hover {
+            @include botaoOutline;
+        }
+    }
+
+    &.outline {
+        @include botaoOutline;
+
+        &:hover {
+            @include botaoPrimario;
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    &.botaoPublico {
+        margin-top: 40px;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
