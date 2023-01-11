@@ -1,4 +1,4 @@
-@import '/src/assets/estilos/variaveis.scss';
+@import '/src/assets/styles/vars.scss';
 
 .containerPaginaPublica {
     display: flex;
@@ -13,25 +13,38 @@
         width: 100%;
     }
 
-    @media screen and (min-width: $breakpointDesktop) {
+    .containerLogo {
+      display: flex;
+      justify-content: center;
+
+      .logo {
+          width: 100%;
+          max-width: 300px;
+      }
+
+      margin-bottom: 40px;
+    }
+
+    &.cadastro {
+      .containerLogo {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
         flex-direction: row;
         padding: 0px 140px;
 
         .containerLogo {
             flex: 2;
-            display: flex;
-            justify-content: center;
             height: 40%;
 
-            .logo {
-                width: 100%;
-                max-width: 300px;
-            }
+            margin-bottom: 0;
         }
 
         .containerConteudo {
             flex: 1;
-            border: 1px solid var(--corPrimaria);
+            border: 1px solid var(--primaria03);
             border-radius: 26px;
             padding: 55px;
         }

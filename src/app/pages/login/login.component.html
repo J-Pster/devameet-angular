@@ -1,0 +1,22 @@
+<app-publica textoBotaoSubmit="Login" (submiterFormulario)="aoSubmeter()">
+  <app-input
+    conteudoFormulario
+    tipo="email"
+    placeholder="E-mail"
+    imagem="assets/images/email.svg"
+    [referenciaFormulario]="obterReferencia('login')"
+  ></app-input>
+  <app-input
+    conteudoFormulario
+    tipo="password"
+    placeholder="Senha"
+    imagem="assets/images/key.svg"
+    [referenciaFormulario]="obterReferencia('password')"
+  ></app-input>
+  <app-cta-footer
+    pergunta="Não possui uma conta?"
+    textoDaAcao="Faça seu cadastro agora!"
+    rota="/cadastro"
+    rodape
+  ></app-cta-footer>
+</app-publica>

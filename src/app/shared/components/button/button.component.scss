@@ -3,6 +3,7 @@
 @mixin botaoPrimario {
     color: var(--branco);
     background-color: var(--primaria03);
+    border: 1px solid transparent;
 }
 
 @mixin botaoOutline {

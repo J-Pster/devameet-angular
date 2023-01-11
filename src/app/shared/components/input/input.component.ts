@@ -34,7 +34,7 @@ export class InputComponent {
       return `Deve ter no mínino ${this.referenciaFormulario.errors['minlength'].requiredLength} caracteres!`;
     }
 
-    if (this.referenciaFormulario?.errors['confirmacaoSenha']) {
+    if (this.referenciaFormulario?.errors['confirmPass']) {
       return 'As senhas não conferem!';
     }
 

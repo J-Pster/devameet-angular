@@ -1,0 +1,43 @@
+<app-publica
+  classeCssLogo="cadastro"
+  textoBotaoSubmit="Cadastrar"
+  (submiterFormulario)="aoSubmeter()"
+>
+  <app-upload-avatar conteudoFormulario>
+    <app-avatar classeCss="avatarCadastro"></app-avatar>
+  </app-upload-avatar>
+  <app-input
+    conteudoFormulario
+    tipo="text"
+    placeholder="Nome Completo"
+    imagem="assets/images/email.svg"
+    [referenciaFormulario]="obterReferencia('nome')"
+  ></app-input>
+  <app-input
+    conteudoFormulario
+    tipo="email"
+    placeholder="E-mail"
+    imagem="assets/images/email.svg"
+    [referenciaFormulario]="obterReferencia('email')"
+  ></app-input>
+  <app-input
+    conteudoFormulario
+    tipo="password"
+    placeholder="Senha"
+    imagem="assets/images/key.svg"
+    [referenciaFormulario]="obterReferencia('password')"
+  ></app-input>
+  <app-input
+    conteudoFormulario
+    tipo="password"
+    placeholder="Confirmar Senha"
+    imagem="assets/images/key.svg"
+    [referenciaFormulario]="obterReferencia('confirmPass')"
+  ></app-input>
+  <app-cta-footer
+    pergunta="Já possui uma conta?"
+    textoDaAcao="Faça seu login agora!"
+    rota="/login"
+    rodape
+  ></app-cta-footer>
+</app-publica>
