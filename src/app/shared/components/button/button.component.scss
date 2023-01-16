@@ -12,6 +12,13 @@
     border: 1px solid var(--primaria03);
 }
 
+@mixin botaoTexto {
+    background-color: transparent;
+    color: var(--primaria03);
+    text-decoration: underline;
+    border: none;
+}
+
 .btn {
     width: 100%;
     border: none;
@@ -34,6 +41,10 @@
         }
     }
 
+    &.texto {
+        @include botaoTexto;
+    }
+
     &:disabled {
         opacity: 0.5;
     }
@@ -42,5 +53,23 @@
         margin-top: 40px;
         padding: 12px;
         font-size: 16px;
+    }
+
+    &.botaoModalAvatar {
+      font-size: 14px;
+      font-weight: 600;
+
+      padding: 12px;
+      border-radius: 8px;
+      width: 100px;
+
+      @media screen and (min-width: $desktopBreakpoint) {
+        font-size: 16px;
+        font-weight: 600;
+
+        padding: 14px;
+        border-radius: 8px;
+        width: 150px;
+      }
     }
 }

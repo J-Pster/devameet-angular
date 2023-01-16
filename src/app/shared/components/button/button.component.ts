@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() public texto?: string;
-  @Input() public cor: 'primaria' | 'outline' = 'primaria';
+  @Input() public cor: 'primaria' | 'outline' | 'texto' = 'primaria';
   @Input() public classeCss: string = '';
   @Input() public tipo: 'button' | 'submit' = 'button';
   @Input() public desabilitar: boolean = false;

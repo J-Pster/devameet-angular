@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { JwtAuthGuard } from './guards/jwt/jwt-auth.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'register',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
-  },
-  {
-    path: 'cadastro',
-    loadChildren: () =>
-      import('./pages/cadastro/cadastro.module').then((m) => m.CadastroModule),
-  },
-  {
-    path: 'meet',
-    loadChildren: () =>
-      import('./pages/meet/meet.module').then((m) => m.MeetModule),
+      import('./pages/register/register.module').then((m) => m.RegisterModule),
   },
   {
     path: '',
-    redirectTo: 'meet',
-    pathMatch: 'full',
+    canActivate: [JwtAuthGuard],
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
   },
 ];
 

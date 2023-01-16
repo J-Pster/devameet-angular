@@ -12,8 +12,4 @@ export class UploadAvatarComponent {
   @Input() public imagemPrevisualizacao?: string;
   @Input() public classeCssImagemPrevisualizacao: string = '';
   @Output() public aoAtualizarImagem: EventEmitter<string> = new EventEmitter();
-
-  public trocarAvatar(event: any): void {
-    console.log('Clicou!');
-  }
 }

@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent {
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
+  ) {
     this.form = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],

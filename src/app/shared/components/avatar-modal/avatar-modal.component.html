@@ -1,0 +1,29 @@
+<div class="body">
+  <header>
+    <h3>Avatar</h3>
+    <h2>Selecione seu avatar</h2>
+  </header>
+  <section>
+    <div
+      class="avatar-item"
+      *ngFor="let avatar of avatars"
+      (click)="selectAvatar(avatar)"
+      [class.selected]="avatar === data.avatarSrc"
+    >
+      <img [src]="avatar" />
+    </div>
+  </section>
+  <footer>
+    <app-button
+      classeCss="botaoModalAvatar"
+      texto="Voltar"
+      cor="texto"
+      (click)="onNoClick()"
+    ></app-button>
+    <app-button
+      classeCss="botaoModalAvatar"
+      texto="Salvar"
+      [mat-dialog-close]="data.avatarSrc"
+    ></app-button>
+  </footer>
+</div>

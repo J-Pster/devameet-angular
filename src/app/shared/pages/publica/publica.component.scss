@@ -19,14 +19,12 @@
 
       .logo {
           width: 100%;
-          max-width: 300px;
+          max-width: 320px;
       }
 
       margin-bottom: 40px;
-    }
 
-    &.cadastro {
-      .containerLogo {
+      &.cadastro {
         display: none;
       }
     }
@@ -40,6 +38,15 @@
             height: 40%;
 
             margin-bottom: 0;
+
+            .logo {
+              width: 100%;
+              max-width: 450px;
+          }
+
+            &.cadastro {
+                display: flex;
+            }
         }
 
         .containerConteudo {

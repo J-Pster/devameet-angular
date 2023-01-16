@@ -7,6 +7,10 @@ import { CtaFooterComponent } from './cta-footer/cta-footer.component';
 import { RouterModule } from '@angular/router';
 import { AvatarComponent } from './avatar/avatar.component';
 import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
+import { HeaderComponent } from './header/header.component';
+import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -15,14 +19,24 @@ import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
     CtaFooterComponent,
     AvatarComponent,
     UploadAvatarComponent,
+    HeaderComponent,
+    AvatarModalComponent,
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatDialogModule,
+    MatFormFieldModule,
+  ],
   exports: [
     InputComponent,
     ButtonComponent,
     CtaFooterComponent,
     AvatarComponent,
     UploadAvatarComponent,
+    HeaderComponent,
   ],
 })
 export class SharedComponentsModule {}

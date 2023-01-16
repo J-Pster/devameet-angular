@@ -1,0 +1,137 @@
+@import '/src/assets/styles/vars.scss';
+
+@mixin flex($direction: row, $justify: flex-start, $align: flex-start) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.body {
+  width: 100%;
+  max-width: 328px;
+
+  height: 463px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    width: 640px;
+    max-width: 640px;
+
+    height: 640px;
+  }
+}
+
+header {
+  @include flex(column, center, flex-start);
+  padding: 16px;
+
+  border-bottom: 1px solid var(--cinza01);
+
+  h3 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cinza02);
+
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primaria03);
+
+    margin: 0;
+  }
+
+  max-height: 71px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    max-height: 72px;
+  }
+}
+
+section {
+  @include flex(row, center, center);
+  flex-wrap: wrap;
+  gap: 6px;
+
+  height: 296px;
+  overflow-y: auto;
+
+  padding: 6px;
+
+  .avatar-item {
+    @include flex(column, center, center);
+
+    flex: 0 0 30%;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+
+    cursor: pointer;
+    background-color: #F0F5FF;
+
+    img {
+      height: 100%;
+      border-radius: 4px;
+
+      user-select: none;
+      pointer-events: none;
+    }
+
+    border: 2px solid transparent;
+
+    &:hover {
+      border: 2px solid var(--cinza01);
+    }
+
+    &.selected {
+      border: 2px solid var(--primaria03);
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+      flex: 0 0 30.6%;
+
+      border: 4px solid transparent;
+
+      &:hover {
+        border: 4px solid var(--cinza01);
+      }
+
+      &.selected {
+        border: 4px solid var(--primaria03);
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    gap: 12px;
+    padding: 10px;
+
+    height: 468px;
+  }
+}
+
+footer {
+  @include flex(row, center, center);
+  gap: 16px;
+
+  height: 80px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    height: 80px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(37, 203, 211, 0.25);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primaria03);
+  border-radius: 8px;
+}

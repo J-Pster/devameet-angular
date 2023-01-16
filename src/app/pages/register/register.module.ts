@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CadastroRoutingModule } from './cadastro-routing.module';
-import { CadastroComponent } from './cadastro.component';
+import { RegisterRoutingModule } from './register-routing.module';
+import { RegisterComponent } from './register.component';
 import { SharedPagesModule } from 'src/app/shared/pages/shared-pages.module';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [CadastroComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
-    CadastroRoutingModule,
+    RegisterRoutingModule,
     SharedPagesModule,
     SharedComponentsModule,
     MatSnackBarModule,
   ],
-  exports: [CadastroComponent],
+  exports: [RegisterComponent],
 })
-export class CadastroModule {}
+export class RegisterModule {}

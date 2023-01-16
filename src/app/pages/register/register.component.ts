@@ -6,16 +6,24 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { confirmPassVal } from 'src/app/shared/validators/confirm-pass.validator';
+import { AvatarModalComponent } from 'src/app/shared/components/avatar-modal/avatar-modal.component';
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class CadastroComponent {
+export class RegisterComponent {
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  public avatarSrc: string = 'assets/images/avatars/avatar_07_front.png';
+
+  constructor(
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -43,5 +51,18 @@ export class CadastroComponent {
         verticalPosition: 'top',
       });
     } catch (error) {}
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AvatarModalComponent, {
+      data: { avatarSrc: this.avatarSrc },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed, result: ', result);
+      if (result) {
+        this.avatarSrc = result;
+      }
+    });
   }
 }

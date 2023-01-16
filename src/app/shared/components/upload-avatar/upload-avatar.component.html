@@ -1,6 +1,6 @@
 <div
   [ngClass]="['containerUploadImagem', classeCssContainer]"
-  (click)="trocarAvatar($event)"
+  (click)="aoAtualizarImagem.emit()"
 >
   <ng-content></ng-content>
 </div>

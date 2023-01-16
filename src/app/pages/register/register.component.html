@@ -3,14 +3,14 @@
   textoBotaoSubmit="Cadastrar"
   (submiterFormulario)="aoSubmeter()"
 >
-  <app-upload-avatar conteudoFormulario>
-    <app-avatar classeCss="avatarCadastro"></app-avatar>
+  <app-upload-avatar conteudoFormulario (aoAtualizarImagem)="openDialog()">
+    <app-avatar [src]="avatarSrc" classeCss="avatarCadastro"></app-avatar>
   </app-upload-avatar>
   <app-input
     conteudoFormulario
     tipo="text"
     placeholder="Nome Completo"
-    imagem="assets/images/email.svg"
+    imagem="assets/images/user.svg"
     [referenciaFormulario]="obterReferencia('nome')"
   ></app-input>
   <app-input
@@ -37,7 +37,7 @@
   <app-cta-footer
     pergunta="Já possui uma conta?"
     textoDaAcao="Faça seu login agora!"
-    rota="/login"
+    rota="/"
     rodape
   ></app-cta-footer>
 </app-publica>
