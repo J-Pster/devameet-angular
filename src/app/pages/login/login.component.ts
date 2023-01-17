@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { passwordValidator } from 'src/app/shared/validators/pass.validator';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,10 @@ export class LoginComponent {
   ) {
     this.form = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(4), passwordValidator()],
+      ],
     });
   }
 
@@ -39,11 +43,19 @@ export class LoginComponent {
       return;
     }
 
-    try {
-      this._snackBar.open('Logando!', 'OK', {
-        duration: 2000,
-        verticalPosition: 'top',
+    const formValues = this.form.value;
+
+    this.authService
+      .login({
+        login: formValues.login,
+        password: formValues.password,
+      })
+      .catch((err) => {
+        const errorMsg = err.error.message || 'Erro ao realizar login!';
+        this._snackBar.open(errorMsg, 'OK', {
+          duration: 6000,
+          verticalPosition: 'top',
+        });
       });
-    } catch (error) {}
   }
 }

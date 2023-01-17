@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
 
     if (!token) {
       this.pageToRender = 'login';
+      this.localStorage.setLogout();
       return;
     }
 

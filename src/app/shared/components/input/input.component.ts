@@ -38,6 +38,10 @@ export class InputComponent {
       return 'As senhas não conferem!';
     }
 
+    if (this.referenciaFormulario?.errors['password']) {
+      return 'Senha inválida!';
+    }
+
     return '';
   }
 }

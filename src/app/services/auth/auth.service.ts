@@ -9,7 +9,10 @@ import {
 import { UserService } from '../user/user.service';
 import { LocalstorageService } from '../local/localstorage.service';
 import { UserLogged } from 'src/app/types/user.type';
-import { RegisterReturnCredentials } from 'src/app/types/register-credentials.type';
+import {
+  RegisterCredentials,
+  RegisterReturnCredentials,
+} from 'src/app/types/register-credentials.type';
 
 @Injectable({
   providedIn: 'root',
@@ -40,10 +43,17 @@ export class AuthService extends ApiService {
     const userData = await this.userApiService.getUser();
     this.localStorageService.setUser(userData);
 
+    // Redirect after login
+    const actualLocation = this.router.url;
+
+    if (actualLocation === '/') {
+      window.location.reload();
+    }
+
     this.router.navigateByUrl('/');
   }
 
-  async register(form: FormData): Promise<void> {
+  async register(form: RegisterCredentials): Promise<void> {
     const response: RegisterReturnCredentials = await this.post(
       'auth/register',
       form
@@ -52,8 +62,8 @@ export class AuthService extends ApiService {
     if (!response._id) throw new Error('Register Error!');
 
     await this.login({
-      login: form.get('email') as string,
-      password: form.get('password') as string,
+      login: form.email,
+      password: form.password,
     });
 
     this.router.navigateByUrl('/');

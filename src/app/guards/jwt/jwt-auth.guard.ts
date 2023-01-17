@@ -20,20 +20,21 @@ export class JwtAuthGuard implements CanActivate {
     private router: Router
   ) {}
 
-  private async checkToken(): Promise<boolean | UrlTree> {
-    try {
-      const response = await this.userService.getUser();
-      console.log('JWT AUTH GUARD!', response);
+  private checkToken(): Promise<boolean | UrlTree> {
+    return this.userService
+      .getUser()
+      .then((response) => {
+        if (!response.id) {
+          this.localStorage.setLogout();
+          return this.router.parseUrl('/');
+        }
 
-      if (!response.id) {
+        return true;
+      })
+      .catch((error) => {
         this.localStorage.setLogout();
         return this.router.parseUrl('/');
-      }
-
-      return true;
-    } catch (error) {
-      return this.router.parseUrl('/');
-    }
+      });
   }
 
   canActivate(
@@ -44,11 +45,13 @@ export class JwtAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // ESSE AUTH GUARD NUNCA PODE SER USADO NA ROTA '/', SE FOR USADO, ELE CAUSARÁ UM LOOP QUE CONGELARÁ O CARREGAMENTO
+
     const token = this.localStorage.getToken();
     if (!token) {
       return this.router.parseUrl('/');
     }
 
-    return true;
+    return this.checkToken();
   }
 }

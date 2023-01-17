@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { JwtAuthGuard } from './guards/jwt/jwt-auth.guard';
+import { RegisterGuard } from './guards/register/register.guard';
 
 const routes: Routes = [
   {
     path: 'register',
+    canActivate: [RegisterGuard],
     loadChildren: () =>
       import('./pages/register/register.module').then((m) => m.RegisterModule),
   },
   {
     path: '',
-    canActivate: [JwtAuthGuard],
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),
   },
