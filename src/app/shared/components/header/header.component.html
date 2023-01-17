@@ -1,10 +1,14 @@
-<header class="header">
+<header>
   <section class="left">
     <img src="assets/images/logo.svg" alt="Logo Devaria" />
   </section>
   <section class="right">
-    <img id="home" src="assets/images/home.svg" alt="Icone de Página Inicial" />
-    <img id="meeting" src="assets/images/link.svg" alt="Icone de Reunião" />
+    <img
+      id="home"
+      [class.active]="active === 'meet'"
+      src="assets/images/home.svg"
+    />
+    <img id="door" src="assets/images/door.svg" />
     <app-avatar></app-avatar>
   </section>
 </header>

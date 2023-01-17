@@ -1,0 +1,25 @@
+@import '/src/assets/styles/vars.scss';
+
+footer {
+  @include flex(row, space-evenly, center);
+  padding: 8px;
+  border-top: 1px solid var(--primaria03);
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  img {
+    width: 30px;
+    height: 30px;
+
+    &.active {
+      filter: brightness(0) saturate(100%) invert(79%) sepia(95%) saturate(2107%) hue-rotate(118deg) brightness(90%) contrast(79%);
+    }
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: none;
+  }
+}

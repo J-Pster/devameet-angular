@@ -1,0 +1,52 @@
+@import '/src/assets/styles/vars.scss';
+
+header {
+  @include flex(row, space-between, center);
+  padding: 12px;
+  border-bottom: 1px solid var(--cinza01);
+
+  .left {
+    @include flex(column, center, center);
+    flex: 1;
+
+    img {
+      width: 100%;
+      max-width: 120px;
+    }
+  }
+
+  .right {
+    display: none;
+    flex: 0;
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    .left {
+      display: block;
+
+      img {
+        width: 100%;
+        max-width: 180px;
+      }
+
+      margin-left: 40px;
+    }
+
+    .right {
+      @include flex(row, center, center);
+      min-width: 200px;
+      gap: 30px;
+
+      img {
+        width: 30px;
+        height: 30px;
+
+        &.active {
+          filter: brightness(0) saturate(100%) invert(79%) sepia(95%) saturate(2107%) hue-rotate(118deg) brightness(90%) contrast(79%);
+        }
+      }
+
+      margin-right: 20px;
+    }
+  }
+}

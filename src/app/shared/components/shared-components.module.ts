@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UploadAvatarComponent,
     HeaderComponent,
     AvatarModalComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AvatarComponent,
     UploadAvatarComponent,
     HeaderComponent,
+    FooterComponent,
   ],
 })
 export class SharedComponentsModule {}
