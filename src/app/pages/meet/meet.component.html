@@ -1,3 +1,16 @@
-<app-header-n-footer [active]="pageName">
-  <p>meet works!</p>
-</app-header-n-footer>
+<app-dashboard [active]="pageName">
+  <div class="userInfos" left>
+    <h1>Minhas Reuniões</h1>
+    <h3>Olá, {{ nome }}!</h3>
+    <img id="new" src="assets/images/plus-square.svg" />
+  </div>
+  <div left *ngIf="meetings.length > 0; else noMetings" class="meetings">
+    <div class="meeting" *ngFor="let meeting of meetings">Meeting!</div>
+  </div>
+  <ng-template #noMetings left>
+    <div class="noMeetings">
+      <img src="assets/images/carinha.svg" />
+      <p>Você ainda não possui reuniões criadas :(</p>
+    </div>
+  </ng-template>
+</app-dashboard>

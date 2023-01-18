@@ -21,6 +21,9 @@ header {
   }
 
   @media screen and (min-width: $desktopBreakpoint) {
+    min-height: 40px;
+    max-height: 40px;
+
     .left {
       display: block;
 
@@ -40,6 +43,8 @@ header {
       img {
         width: 30px;
         height: 30px;
+
+        cursor: pointer;
 
         &.active {
           filter: brightness(0) saturate(100%) invert(79%) sepia(95%) saturate(2107%) hue-rotate(118deg) brightness(90%) contrast(79%);

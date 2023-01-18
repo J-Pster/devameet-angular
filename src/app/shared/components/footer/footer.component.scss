@@ -4,6 +4,7 @@ footer {
   @include flex(row, space-evenly, center);
   padding: 8px;
   border-top: 1px solid var(--primaria03);
+  background-color: rgba(37, 203, 211, 0.05);;
 
   position: fixed;
   bottom: 0;
@@ -13,6 +14,8 @@ footer {
   img {
     width: 30px;
     height: 30px;
+
+    cursor: pointer;
 
     &.active {
       filter: brightness(0) saturate(100%) invert(79%) sepia(95%) saturate(2107%) hue-rotate(118deg) brightness(90%) contrast(79%);

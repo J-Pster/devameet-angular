@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalstorageService } from 'src/app/services/local/localstorage.service';
 
 @Component({
   selector: 'app-meet',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class MeetComponent {
   pageName = 'meet';
+  nome = 'Usuário';
+  meetings = [];
+
+  constructor(private localStorageService: LocalstorageService) {}
+
+  ngOnInit() {
+    this.nome = this.localStorageService.getItem('name') || 'Usuário';
+  }
 }
