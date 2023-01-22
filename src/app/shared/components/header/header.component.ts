@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,15 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() active: string = '';
+  @Input() cssClass: string = '';
+
+  constructor(private route: Router) {}
+
+  navigate(page: string) {
+    this.route.navigateByUrl(page);
+  }
+
+  getAvatarClass() {
+    return this.active === 'profile' ? 'navActive' : 'nav';
+  }
 }

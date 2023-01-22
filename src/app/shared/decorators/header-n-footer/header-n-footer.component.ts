@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderNFooterComponent {
   @Input() active: string = '';
+  @Input() cssClass: string = '';
 }

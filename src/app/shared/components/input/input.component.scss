@@ -11,5 +11,54 @@
           margin-left: 12px;
           flex: 1;
       }
+
+    &.profile {
+      border: none;
+      margin: 0;
+      padding: 0;
+
+      img {
+        display: none;
+      }
+
+      input {
+          border: none;
+          outline: none;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--cinza04);
+          margin-left: 6px;
+          flex: 1;
+
+          &:disabled {
+            background-color: transparent;
+          }
+      }
+    }
+
+    &.newMeet {
+      border: none;
+      margin: 0;
+      padding: 0;
+
+      img {
+        display: none;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--primaria03);
+
+        margin: 0;
+        flex: 1;
+      }
+
+      ::placeholder {
+        color: var(--primaria03);
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,14 @@ import { Component, Input } from '@angular/core';
 })
 export class FooterComponent {
   @Input() active: string = '';
+
+  constructor(private route: Router) {}
+
+  navigate(page: string) {
+    this.route.navigateByUrl(page);
+  }
+
+  getAvatarClass() {
+    return this.active === 'profile' ? 'navActive' : 'nav';
+  }
 }

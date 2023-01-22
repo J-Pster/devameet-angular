@@ -1,17 +1,17 @@
-<app-publica textoBotaoSubmit="Login" (submiterFormulario)="aoSubmeter()">
+<app-publica textoBotaoSubmit="Login" (submiterFormulario)="onSubmit()">
   <app-input
     conteudoFormulario
     tipo="email"
     placeholder="E-mail"
     imagem="assets/images/email.svg"
-    [referenciaFormulario]="obterReferencia('login')"
+    [referenciaFormulario]="getFormRef('login')"
   ></app-input>
   <app-input
     conteudoFormulario
     tipo="password"
     placeholder="Senha"
     imagem="assets/images/key.svg"
-    [referenciaFormulario]="obterReferencia('password')"
+    [referenciaFormulario]="getFormRef('password')"
   ></app-input>
   <app-cta-footer
     pergunta="Não possui uma conta?"

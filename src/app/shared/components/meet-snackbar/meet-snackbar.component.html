@@ -1,0 +1,28 @@
+<div class="meet">
+  <div class="left">
+    <div class="colorBar" [style.color]="meet.color"></div>
+    <h2>{{ meet.name }}</h2>
+  </div>
+  <div class="right">
+    <img
+      id="door"
+      src="assets/images/meeting-icons/door.svg"
+      (click)="joinMeet()"
+    />
+    <img
+      id="copy"
+      src="assets/images/meeting-icons/copy.svg"
+      (click)="copyLink()"
+    />
+    <img
+      id="edit"
+      src="assets/images/meeting-icons/edit.svg"
+      (click)="editMeet()"
+    />
+    <img
+      id="trash"
+      src="assets/images/meeting-icons/trashcan.svg"
+      (click)="deleteMeet()"
+    />
+  </div>
+</div>

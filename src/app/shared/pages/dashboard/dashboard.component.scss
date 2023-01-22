@@ -1,17 +1,21 @@
 @import '/src/assets/styles/vars.scss';
 
 section {
+  @include flex(row, flex-start, flex-start);
+
   background-image: url('../../../../assets/images/background.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 
+  height: calc(100vh - 100px);
+
   .left {
-    width: 360px;
     background-color: #FFF;
     border-right: 1px solid var(--cinza01);
 
-    height: calc(100vh - 100px);
+    height: 100%;
+    flex-grow: 1;
 
     @include flex(column, flex-start, flex-start);
   }
@@ -21,8 +25,18 @@ section {
   }
 
   @media screen and (min-width: $desktopBreakpoint) {
+    height: calc(100vh - 65px);
+
     .left {
-      height: calc(100vh - 65px);
+      flex-grow: 0;
+      width: 360px;
+    }
+
+    .right {
+      @include flex(column, center, center);
+      flex-grow: 1;
+
+      height: 100%;
     }
   }
 }

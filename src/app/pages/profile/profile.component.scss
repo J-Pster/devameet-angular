@@ -1,0 +1,110 @@
+@import '/src/assets/styles/vars.scss';
+
+section {
+  background-image: url('../../../assets/images/background.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  height: calc(100vh - 55px);
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    height: calc(100vh - 65px);
+
+    @include flex(column, center, center);
+  }
+}
+
+.container {
+  @include flex(column, flex-start, center);
+  background-color: #FFF;
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    width: 620px;
+    height: 620px;
+
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
+    padding: 20px;
+  }
+
+  #exit {
+    @include flex(row, flex-start, center);
+    position: absolute;
+
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 60px; /* Need a specific value to work */
+
+    cursor: pointer;
+
+    img {
+      width: 24px;
+      height: 24px;
+
+      margin-right: 10px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--primaria03);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+.header {
+  @include flex(row, space-between, center);
+  padding: 12px 16px;
+  width: calc(100% - 32px);
+  border-bottom: 1px solid var(--cinza01);
+
+  h1 {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--fontBold);
+    color: var(--cinza04);
+
+    margin: 0;
+  }
+
+  @media screen and (min-width: $desktopBreakpoint) {
+  }
+}
+
+app-upload-avatar {
+  padding: 20px;
+}
+
+.name {
+  @include flex(row, space-between, center);
+  padding: 16px;
+  width: calc(100% - 32px);
+
+  border-bottom: 1px solid var(--cinza01);
+  border-top: 1px solid var(--cinza01);
+
+  img {
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+  }
+
+  .nameInput {
+    @include flex(row, flex-start, center);
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--cinza03);
+
+      margin: 0;
+    }
+  }
+}

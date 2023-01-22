@@ -1,0 +1,23 @@
+<app-dashboard active="new">
+  <app-meet-name-n-color
+    left
+    title="Nova reunião"
+    [nameControl]="getFormRef('name')"
+    [selectedColor]="selectedColor"
+    (changeColor)="changeColor($event)"
+  ></app-meet-name-n-color>
+  <div class="buttons" left>
+    <app-button
+      (click)="onCancel()"
+      classeCss="botaoModalAvatar"
+      texto="Voltar"
+      cor="texto"
+    ></app-button>
+    <app-button
+      (click)="onSubmit()"
+      cor="primaria"
+      classeCss="botaoModalAvatar"
+      texto="Salvar"
+    ></app-button>
+  </div>
+</app-dashboard>

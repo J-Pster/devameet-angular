@@ -1,0 +1,13 @@
+@import '/src/assets/styles/vars.scss';
+
+app-meet-name-n-color {
+  width: 100%;
+}
+
+.buttons {
+  @include flex(row, center, center);
+  width: 100%;
+  padding: 20px 0;
+
+  align-self: flex-end;
+}

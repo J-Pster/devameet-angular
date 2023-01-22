@@ -42,6 +42,15 @@
   }
 }
 
+.meetings {
+  @include flex(column, center, center);
+  width: 100%;
+
+  app-meet-snackbar {
+    width: 100%;
+  }
+}
+
 .noMeetings {
   @include flex(column, center, center);
   margin-top: 70px;

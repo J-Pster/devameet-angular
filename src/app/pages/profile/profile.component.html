@@ -1,0 +1,44 @@
+<app-header-n-footer active="profile" cssClass="profile">
+  <section>
+    <div class="container">
+      <div class="header">
+        <app-button
+          classeCss="cinzaSoTexto"
+          texto="Cancelar"
+          cor="texto"
+          (click)="onCancel()"
+        ></app-button>
+        <h1>Editar perfil</h1>
+        <app-button
+          classeCss="soTexto"
+          texto="Concluir"
+          cor="texto"
+          (click)="onSubmit()"
+        ></app-button>
+      </div>
+
+      <app-upload-avatar (aoAtualizarImagem)="openDialog()">
+        <app-avatar [src]="avatarSrc" classeCss="avatarCadastro"></app-avatar>
+      </app-upload-avatar>
+
+      <div class="name">
+        <div class="nameInput">
+          <p>Nome</p>
+          <app-input
+            [disabled]="disabledName"
+            [default]="name"
+            cssClass="profile"
+            tipo="text"
+            placeholder="Nome"
+            [referenciaFormulario]="getFormRef('name')"
+          ></app-input>
+        </div>
+        <img (click)="togleName()" src="assets/images/x-circle.svg" />
+      </div>
+      <div id="exit" (click)="onLogout()">
+        <img src="assets/images/leave.svg" />
+        <p>Sair</p>
+      </div>
+    </div>
+  </section>
+</app-header-n-footer>

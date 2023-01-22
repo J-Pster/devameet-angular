@@ -1,0 +1,71 @@
+@import '/src/assets/styles/vars.scss';
+
+.container-object-picker {
+  @include flex(column, center, flex-start);
+
+  width: calc(100% - 40px);
+  padding: 20px;
+  border-bottom: 1px solid var(--cinza01);
+
+  &.disabled {
+    cursor: auto;
+  }
+
+  .action {
+    @include flex(row, center, center);
+
+    cursor: pointer;
+
+    img {
+      margin-right: 9px;
+    }
+
+    span {
+      margin-right: 14px;
+    }
+  }
+
+  .objects{
+    @include flex(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    gap: 6px;
+
+    width: 100%;
+    margin-left: -3px;
+    margin-top: 18px;
+
+    div {
+      @include flex(column, center, center);
+      position: relative;
+      width: 30%;
+      aspect-ratio: 1/1;
+
+      cursor: pointer;
+
+      border: 2px solid transparent;
+
+      &:hover {
+        border: 2px solid var(--cinza03);
+      }
+
+      &.selected {
+        border: 2px solid var(--primaria03);
+      }
+
+      .object{
+        height: 90%;
+
+        &.large{
+          height: auto;
+          width: 100%;
+        }
+      }
+
+      .add{
+        position: absolute;
+        align-self: center;
+        justify-self: center;
+      }
+    }
+  }
+}

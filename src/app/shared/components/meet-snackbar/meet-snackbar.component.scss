@@ -1,0 +1,57 @@
+@import '/src/assets/styles/vars.scss';
+
+.meet {
+  @include flex(row, space-between, center);
+  padding: 8px 0;
+  margin: 0 8px;
+
+  border-bottom: 0.5px solid #DADADA;
+
+  .left {
+    @include flex(row, flex-start, center);
+
+    h2 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cinza03);
+
+      margin-left: 8px;
+    }
+
+    .colorBar {
+      background-color: currentColor;
+      width: 6px;
+      height: 32px;
+      border-radius: 500px;
+
+      &:before {
+          display: inline-block;
+      }
+    }
+
+  }
+
+  .right {
+    @include flex(row, flex-end, center);
+    gap: 10px;
+
+    img {
+      cursor: pointer;
+    }
+
+    #edit {
+      display: none;
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+      #door {
+        display: none;
+      }
+
+      #edit {
+        display: block;
+      }
+    }
+  }
+}

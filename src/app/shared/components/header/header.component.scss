@@ -54,4 +54,10 @@ header {
       margin-right: 20px;
     }
   }
+
+  &.profile {
+    @media screen and (max-width: $desktopBreakpoint) {
+      display: none;
+    }
+  }
 }

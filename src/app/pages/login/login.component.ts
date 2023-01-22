@@ -30,11 +30,11 @@ export class LoginComponent {
     });
   }
 
-  public obterReferencia(nomeCampo: string): AbstractControl {
+  public getFormRef(nomeCampo: string): AbstractControl {
     return this.form.controls[nomeCampo];
   }
 
-  public async aoSubmeter() {
+  public async onSubmit() {
     if (this.form.invalid) {
       this._snackBar.open('Preencha todos os campos corretamente!', 'OK', {
         duration: 2000,

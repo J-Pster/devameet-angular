@@ -1,0 +1,52 @@
+@import '/src/assets/styles/vars.scss';
+
+@mixin list-reset() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+}
+
+.material-color-picker {
+  display: flex;
+  width: 50px;
+  margin: 0 auto;
+}
+
+.color-selector {
+  @include list-reset;
+  @include flex(column, center, center);
+
+  width: 100%;
+  padding: 10px 0;
+
+  background-color: #FFF;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+
+  input[type='radio'] {
+      display: none;
+  }
+
+  label {
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &:before {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          padding: 0.75em;
+          background-color: currentColor;
+          border-radius: 50%;
+      }
+  }
+
+  input[type='radio']:checked + label:after {
+      padding: 1em;
+  }
+}

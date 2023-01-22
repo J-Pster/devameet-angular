@@ -1,11 +1,14 @@
-<app-dashboard [active]="pageName">
+<app-dashboard active="meet">
   <div class="userInfos" left>
     <h1>Minhas Reuniões</h1>
     <h3>Olá, {{ nome }}!</h3>
-    <img id="new" src="assets/images/plus-square.svg" />
+    <img id="new" src="assets/images/plus-square.svg" (click)="createMeet()" />
   </div>
   <div left *ngIf="meetings.length > 0; else noMetings" class="meetings">
-    <div class="meeting" *ngFor="let meeting of meetings">Meeting!</div>
+    <app-meet-snackbar
+      *ngFor="let meet of meetings"
+      [meet]="meet"
+    ></app-meet-snackbar>
   </div>
   <ng-template #noMetings left>
     <div class="noMeetings">

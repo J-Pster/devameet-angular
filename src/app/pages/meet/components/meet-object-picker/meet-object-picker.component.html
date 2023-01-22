@@ -1,0 +1,38 @@
+<div class="container-object-picker">
+  <div class="action" (click)="toggleShow()">
+    <img [src]="iconSrc" alt="Paredes da sala" />
+    <span>{{ title }}</span>
+    <img
+      src="assets/images/object-icons/arrow-right.svg"
+      alt="Mostrar objetos"
+      *ngIf="!show"
+    />
+    <img
+      src="assets/images/object-icons/arrow-down.svg"
+      alt="Esconder objetos"
+      *ngIf="show"
+    />
+  </div>
+  <div class="objects" *ngIf="show">
+    <div
+      *ngFor="let object of asset?.objects"
+      (click)="selectObject(object)"
+      [ngClass]="
+        asset?.selectMultiple === false && object == selected ? 'selected' : ''
+      "
+    >
+      <img
+        class="object"
+        [src]="getImageFromObject(object)"
+        [ngClass]="
+          asset?.path === 'couch' || asset?.path === 'wall' ? 'large' : ''
+        "
+      />
+      <img
+        class="add"
+        src="assets/images/plus-circle.svg"
+        *ngIf="asset?.selectMultiple"
+      />
+    </div>
+  </div>
+</div>

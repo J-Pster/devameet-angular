@@ -1,0 +1,17 @@
+<section class="modal">
+  <h2>{{ data.title }}</h2>
+  <p>{{ data.message }}</p>
+  <div class="buttons">
+    <app-button
+      classeCss="botaoModalAvatar"
+      [texto]="data.cancelText"
+      cor="texto"
+      (click)="cancelClick()"
+    ></app-button>
+    <app-button
+      classeCss="botaoModalAvatar"
+      [texto]="data.confirmText"
+      [mat-dialog-close]="true"
+    ></app-button>
+  </div>
+</section>

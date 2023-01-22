@@ -1,0 +1,55 @@
+<div class="container-objects" (keyup.arrow)="moveSelected($event)">
+  <div class="grid">
+    <div class="line column one"></div>
+    <div class="line column two"></div>
+    <div class="line column three"></div>
+    <div class="line column four"></div>
+    <div class="line column five"></div>
+    <div class="line column six"></div>
+    <div class="line column seven"></div>
+    <div class="line row one"></div>
+    <div class="line row two"></div>
+    <div class="line row three"></div>
+    <div class="line row four"></div>
+    <div class="line row five"></div>
+    <div class="line row six"></div>
+    <div class="line row seven"></div>
+    <img
+      *ngFor="let object of objects"
+      [src]="getImageFromObject(object)"
+      [ngStyle]="getObjectStyle(object)"
+      [ngClass]="getClassObject(object)"
+      (click)="selectObject(object)"
+    />
+  </div>
+  <div class="actions">
+    <div
+      (click)="removeObject.emit(selected)"
+      [ngClass]="{ active: selected?._id }"
+    >
+      <img src="assets/images/trashcan.svg" alt="Deletar objeto" />
+    </div>
+    <div
+      [ngClass]="{
+        active:
+          selected?.canRotate ||
+          selected?.type === 'chair' ||
+          selected?.type === 'couch'
+      }"
+      (click)="rotateObject.emit({ selected, to: 'right' })"
+    >
+      <img src="assets/images/rotate-right.svg" alt="Girar a direita" />
+    </div>
+    <div
+      [ngClass]="{
+        active:
+          selected?.canRotate ||
+          selected?.type === 'chair' ||
+          selected?.type === 'couch'
+      }"
+      (click)="rotateObject.emit({ selected, to: 'left' })"
+    >
+      <img src="assets/images/rotate-left.svg" alt="Girar a esquerda" />
+    </div>
+  </div>
+</div>

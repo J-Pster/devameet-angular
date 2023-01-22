@@ -40,4 +40,13 @@ export class ApiService {
       });
     });
   }
+
+  public delete(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.getUrl(url)).subscribe({
+        next: (v) => resolve(v),
+        error: (e) => reject(e),
+      });
+    });
+  }
 }

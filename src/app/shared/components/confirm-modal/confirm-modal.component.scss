@@ -1,0 +1,29 @@
+@import '/src/assets/styles/vars.scss';
+
+.modal {
+  @include flex(column, center, center);
+  padding: 24px;
+
+  border-radius: 8px;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 16px;
+
+    color: var(--primaria03);
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 24px;
+
+    max-width: 275px;
+    text-align: center;
+
+    color: var(--cinza02);
+  }
+}

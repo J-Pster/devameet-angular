@@ -1,0 +1,13 @@
+<div class="parent">
+  <div class="container" (click)="openSelector()">
+    <div class="color" [style.color]="selected"></div>
+    <img src="assets/images/arrow-down.svg" />
+  </div>
+
+  <app-color-selector-modal
+    [colors]="colors"
+    [selected]="selected"
+    (onSelect)="selectColor($event)"
+    *ngIf="opened"
+  ></app-color-selector-modal>
+</div>

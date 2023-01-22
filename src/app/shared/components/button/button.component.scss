@@ -43,33 +43,44 @@
 
     &.texto {
         @include botaoTexto;
-    }
 
-    &:disabled {
-        opacity: 0.5;
+        width: fit-content !important;
     }
 
     &.botaoPublico {
-        margin-top: 40px;
-        padding: 12px;
-        font-size: 16px;
-    }
+      margin-top: 40px;
+      padding: 12px;
+      font-size: 16px;
+  }
 
-    &.botaoModalAvatar {
-      font-size: 14px;
+  &.botaoModalAvatar {
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 12px;
+    border-radius: 8px;
+    width: 100px;
+
+    @media screen and (min-width: $desktopBreakpoint) {
+      font-size: 16px;
       font-weight: 600;
 
-      padding: 12px;
+      padding: 14px;
       border-radius: 8px;
-      width: 100px;
-
-      @media screen and (min-width: $desktopBreakpoint) {
-        font-size: 16px;
-        font-weight: 600;
-
-        padding: 14px;
-        border-radius: 8px;
-        width: 150px;
-      }
+      width: 150px;
     }
+  }
+
+  &.cinzaSoTexto {
+    color: var(--cinza03);
+    text-decoration: none;
+  }
+
+  &.soTexto {
+    text-decoration: none;
+  }
+
+  &:disabled {
+      opacity: 0.5;
+  }
 }

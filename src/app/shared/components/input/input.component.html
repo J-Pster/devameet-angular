@@ -1,5 +1,5 @@
 <div class="containerInputPublico">
-  <div class="inputPublico">
+  <div [ngClass]="['inputPublico', cssClass]">
     <img
       class="iconeInput"
       alt="imagem do input"
@@ -9,6 +9,7 @@
     />
 
     <input
+      [disabled]="disabled"
       [type]="tipo"
       [placeholder]="placeholder"
       [ngModel]="referenciaFormulario?.value"

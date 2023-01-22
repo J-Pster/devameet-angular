@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="material-color-picker">
+    <div class="material-color-picker">
+      <ol class="color-selector">
+        <li *ngFor="let color of colors">
+          <input
+            name="material-color"
+            type="radio"
+            [id]="color.value"
+            [value]="color.value"
+            [checked]="color.value === selected"
+          />
+          <label
+            (click)="selectColor($event)"
+            [style.color]="color.value"
+            [title]="color.value"
+            [for]="color.value"
+          ></label>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

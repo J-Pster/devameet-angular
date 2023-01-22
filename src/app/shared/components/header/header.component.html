@@ -1,14 +1,18 @@
-<header>
+<header [ngClass]="[cssClass]">
   <section class="left">
     <img src="assets/images/logo.svg" alt="Logo Devaria" />
   </section>
   <section class="right">
     <img
+      (click)="navigate('/')"
       id="home"
       [class.active]="active === 'meet'"
       src="assets/images/home.svg"
     />
     <img id="door" src="assets/images/door.svg" />
-    <app-avatar></app-avatar>
+    <app-avatar
+      (click)="navigate('/profile')"
+      [classeCss]="getAvatarClass()"
+    ></app-avatar>
   </section>
 </header>

@@ -1,0 +1,52 @@
+@import '/src/assets/styles/vars.scss';
+
+app-meet-name-n-color {
+  width: 100%;
+}
+
+app-meet-object-picker {
+  width: 100%;
+}
+
+section {
+  @include flex(column, center, center);
+  width: 100%;
+  height: 100%;
+
+  app-meet-name-n-color {
+    height: fit-content;
+    flex-grow: 0;
+  }
+
+  .objects {
+    flex-grow: 1;
+    width: 100%;
+
+    overflow-y: auto;
+  }
+
+  .buttons {
+    @include flex(row, center, center);
+    width: 100%;
+    padding: 20px 0;
+
+    height: fit-content;
+    flex-grow: 0;
+
+    align-self: flex-end;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(37, 203, 211, 0.25);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primaria03);
+  border-radius: 8px;
+}

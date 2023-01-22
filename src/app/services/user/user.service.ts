@@ -18,7 +18,7 @@ export class UserService extends ApiService {
     return this.get('user');
   }
 
-  updateUser(newUser: UserPut): void {
-    this.put('user', newUser);
+  updateUser(newUser: UserPut): Promise<any> {
+    return this.put('user', newUser);
   }
 }

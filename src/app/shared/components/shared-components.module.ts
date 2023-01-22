@@ -12,6 +12,11 @@ import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FooterComponent } from './footer/footer.component';
+import { ColorSelectorComponent } from './color-selector/color-selector.component';
+import { ColorSelectorModalComponent } from './color-selector/color-selector-modal/color-selector-modal.component';
+import { MeetSnackbarComponent } from './meet-snackbar/meet-snackbar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,10 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     AvatarModalComponent,
     FooterComponent,
+    ColorSelectorComponent,
+    ColorSelectorModalComponent,
+    MeetSnackbarComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +40,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatSnackBarModule,
   ],
   exports: [
     InputComponent,
@@ -40,6 +50,8 @@ import { FooterComponent } from './footer/footer.component';
     UploadAvatarComponent,
     HeaderComponent,
     FooterComponent,
+    ColorSelectorComponent,
+    MeetSnackbarComponent,
   ],
 })
 export class SharedComponentsModule {}
