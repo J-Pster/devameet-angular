@@ -236,8 +236,6 @@ export class EditMeetComponent implements OnInit {
       objects: this.objectsFromMeet,
     };
 
-    console.log('body', body);
-
     this.meetService
       .updateMeet(this.meet._id, body)
       .then((res) => {

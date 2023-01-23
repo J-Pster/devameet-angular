@@ -9,6 +9,7 @@
     id="door"
     src="assets/images/door.svg"
     [class.active]="active === 'meet'"
+    (click)="navigate('/join')"
   />
   <app-avatar
     [classeCss]="getAvatarClass()"

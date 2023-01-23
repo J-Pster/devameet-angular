@@ -21,8 +21,6 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   @Input() selected: any;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes: ', changes);
-
     if (changes['selected']) {
       this.selected = changes['selected'].currentValue;
     }
@@ -38,9 +36,6 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     document.addEventListener('keyup', this.moveSelected);
-
-    console.log('objects', this.objects);
-    console.log('Selected: ', this.selected);
   }
 
   ngOnDestroy(): void {

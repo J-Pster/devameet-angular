@@ -31,7 +31,6 @@ export class MeetOcurringComponent {
   }
 
   getImageFromAvatar(user: any) {
-    console.log('AVATAR', user?.avatar);
     const splited = user?.avatar.split('_');
     const avatar = `${splited[0]}_${splited[1]}`;
 
@@ -61,7 +60,6 @@ export class MeetOcurringComponent {
   }
 
   getObjectStyle(obj: any): any {
-    console.log('Get Obj Style Obj: ', obj);
     const { zindex, type } = obj;
 
     const style = {} as any;

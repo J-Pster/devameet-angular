@@ -1,5 +1,5 @@
 <app-header-n-footer active="meet">
-  <section>
+  <section [class.notFound]="error">
     <div class="resume" *ngIf="!error">
       <div>
         <span><span>Reunião</span> {{ link }}</span>
@@ -37,6 +37,23 @@
           *ngIf="me && me.muted === true"
           (click)="togglMute()"
         />
+      </div>
+    </div>
+
+    <div class="movement" *ngIf="mobile && !error">
+      <div class="button" (click)="moveAvatar({ key: 'ArrowUp' })">
+        <img src="assets/images/keys/up.svg" alt="Mover para cima" />
+      </div>
+      <div class="line">
+        <div class="button" (click)="moveAvatar({ key: 'ArrowLeft' })">
+          <img src="assets/images/keys/left.svg" alt="Mover para esquerda" />
+        </div>
+        <div class="button" (click)="moveAvatar({ key: 'ArrowDown' })">
+          <img src="assets/images/keys/down.svg" alt="Mover para baixo" />
+        </div>
+        <div class="button" (click)="moveAvatar({ key: 'ArrowRight' })">
+          <img src="assets/images/keys/right.svg" alt="Mover para direita" />
+        </div>
       </div>
     </div>
 

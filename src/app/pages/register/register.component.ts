@@ -38,7 +38,7 @@ export class RegisterComponent {
     });
   }
 
-  public obterReferencia(nomeCampo: string): AbstractControl {
+  public getFormRef(nomeCampo: string): AbstractControl {
     return this.form.controls[nomeCampo];
   }
 

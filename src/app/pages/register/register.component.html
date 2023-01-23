@@ -11,28 +11,28 @@
     tipo="text"
     placeholder="Nome Completo"
     imagem="assets/images/user.svg"
-    [referenciaFormulario]="obterReferencia('nome')"
+    [referenciaFormulario]="getFormRef('nome')"
   ></app-input>
   <app-input
     conteudoFormulario
     tipo="email"
     placeholder="E-mail"
     imagem="assets/images/email.svg"
-    [referenciaFormulario]="obterReferencia('email')"
+    [referenciaFormulario]="getFormRef('email')"
   ></app-input>
   <app-input
     conteudoFormulario
     tipo="password"
     placeholder="Senha"
     imagem="assets/images/key.svg"
-    [referenciaFormulario]="obterReferencia('password')"
+    [referenciaFormulario]="getFormRef('password')"
   ></app-input>
   <app-input
     conteudoFormulario
     tipo="password"
     placeholder="Confirmar Senha"
     imagem="assets/images/key.svg"
-    [referenciaFormulario]="obterReferencia('confirmPass')"
+    [referenciaFormulario]="getFormRef('confirmPass')"
   ></app-input>
   <app-cta-footer
     pergunta="Já possui uma conta?"

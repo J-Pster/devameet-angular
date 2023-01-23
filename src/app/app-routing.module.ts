@@ -45,6 +45,14 @@ const routes: Routes = [
         (m) => m.JoinMeetModule
       ),
   },
+  {
+    path: 'join',
+    canActivate: [JwtAuthGuard],
+    loadChildren: () =>
+      import('./pages/meet/pages/link-meet/link-meet.module').then(
+        (m) => m.LinkMeetModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,20 @@
+<app-dashboard active="meet">
+  <div class="userInfos" left>
+    <h1>Reunião</h1>
+    <h3>Olá, {{ nome }}!</h3>
+  </div>
+  <div class="form" left>
+    <app-input
+      tipo="text"
+      placeholder="Id da Reunião (xxx-xxxx-xxx)"
+      imagem="assets/images/link.svg"
+      [referenciaFormulario]="getFormRef('link')"
+    ></app-input>
+    <app-button
+      texto="Entrar"
+      cor="primaria"
+      (click)="joinMeet()"
+      classeCss="join"
+    ></app-button>
+  </div>
+</app-dashboard>

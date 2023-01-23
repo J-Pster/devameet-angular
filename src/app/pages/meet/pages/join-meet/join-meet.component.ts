@@ -27,6 +27,8 @@ export class JoinMeetComponent implements OnDestroy {
   error: boolean = false;
   userId: string = '';
 
+  mobile: boolean = window.innerWidth < 992;
+
   constructor(
     private routeActive: ActivatedRoute,
     private localStorageService: LocalstorageService,
@@ -187,8 +189,10 @@ export class JoinMeetComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     document.removeEventListener('keyup', this.moveAvatar);
-    this.userMediaStream.getTracks().forEach((track: any) => track.stop());
-    this.wsServices.removePeerConnection(this.userId);
+    if (this.joined) {
+      this.userMediaStream.getTracks().forEach((track: any) => track.stop());
+      this.wsServices.removePeerConnection(this.userId);
+    }
   }
 
   loadMeeting() {
