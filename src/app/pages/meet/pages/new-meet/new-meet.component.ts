@@ -52,20 +52,12 @@ export class NewMeetComponent {
 
     const formValues = this.form.value;
 
-    console.log('Reunião sendo criada!', formValues.name, this.selectedColor);
-
     this.meetService
       .createMeet({
         name: formValues.name,
         color: this.selectedColor,
       })
       .then(() => {
-        console.log(
-          'Reunião criada com Sucesso!',
-          formValues.name,
-          this.selectedColor
-        );
-
         this._snackBar.open('Reunião criada com Sucesso!', 'OK', {
           duration: 2000,
           verticalPosition: 'top',

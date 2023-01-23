@@ -1,0 +1,20 @@
+<div class="container-objects">
+  <div class="grid">
+    <img
+      *ngFor="let object of objects"
+      [src]="getImageFromObject(object)"
+      [class]="getClassObject(object)"
+      [style]="getObjectStyle(object)"
+    />
+    <div
+      class="user-avatar"
+      *ngFor="let user of connectedUsers"
+      [class]="getClassObject(user)"
+    >
+      <div [class]="getMutedClass(user)">
+        <span [class]="getMutedClass(user)">{{ getName(user) }}</span>
+      </div>
+      <img [src]="getImageFromAvatar(user)" [style]="getObjectStyle(user)" />
+    </div>
+  </div>
+</div>

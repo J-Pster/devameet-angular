@@ -65,7 +65,6 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed, result: ', result);
       if (result) {
         this.avatarSrc = result;
       }

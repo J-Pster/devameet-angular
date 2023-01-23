@@ -1,1 +1,55 @@
-<p>join-meet works!</p>
+<app-header-n-footer active="meet">
+  <section>
+    <div class="resume" *ngIf="!error">
+      <div>
+        <span><span>Reunião</span> {{ link }}</span>
+        <img src="assets/images/meeting-icons/copy.svg" (click)="copyLink()" />
+      </div>
+      <p [style.color]="color">{{ name }}</p>
+    </div>
+
+    <div class="preview-container">
+      <app-meet-ocurring
+        [objects]="objects"
+        [connectedUsers]="connectedUsers"
+      ></app-meet-ocurring>
+
+      <div class="preview" *ngIf="!joined && !error">
+        <img src="assets/images/meeting-icons/door.svg" alt="Entrar na sala" />
+        <button (click)="joinRoom()">Entrar na sala</button>
+      </div>
+
+      <div class="error" *ngIf="error">
+        <img src="assets/images/carinha.svg" alt="Erro" />
+        <p>Reunião não encontrada :/</p>
+      </div>
+
+      <div class="mute">
+        <img
+          class="audio"
+          src="assets/images/meeting-icons/mic-on.svg"
+          *ngIf="me && me.muted === false"
+          (click)="togglMute()"
+        />
+        <img
+          class="audio"
+          src="assets/images/meeting-icons/mic-off.svg"
+          *ngIf="me && me.muted === true"
+          (click)="togglMute()"
+        />
+      </div>
+    </div>
+
+    <div id="audio">
+      <audio id="localVideoRef" autoplay playsinline [muted]="true"></audio>
+      <audio
+        *ngFor="let user of usersWithoutMe()"
+        autoplay
+        playsinline
+        [srcObject]="getAudioSrc(user?.clientId)"
+        [id]="user?.clientId"
+        [muted]="user?.muted"
+      ></audio>
+    </div>
+  </section>
+</app-header-n-footer>

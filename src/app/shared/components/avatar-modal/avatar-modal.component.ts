@@ -12,15 +12,15 @@ export interface DialogData {
 })
 export class AvatarModalComponent {
   avatars = [
-    'assets/images/avatars/avatar_01_front.png',
-    'assets/images/avatars/avatar_02_front.png',
-    'assets/images/avatars/avatar_03_front.png',
-    'assets/images/avatars/avatar_04_front.png',
-    'assets/images/avatars/avatar_05_front.png',
-    'assets/images/avatars/avatar_06_front.png',
-    'assets/images/avatars/avatar_07_front.png',
-    'assets/images/avatars/avatar_08_front.png',
-    'assets/images/avatars/avatar_09_front.png',
+    'avatar_01_front',
+    'avatar_02_front',
+    'avatar_03_front',
+    'avatar_04_front',
+    'avatar_05_front',
+    'avatar_06_front',
+    'avatar_07_front',
+    'avatar_08_front',
+    'avatar_09_front',
   ];
 
   constructor(
@@ -30,6 +30,10 @@ export class AvatarModalComponent {
 
   selectAvatar(avatar: string): void {
     this.data.avatarSrc = avatar;
+  }
+
+  public getAvatar(avatar: string): string {
+    return `assets/images/avatars/${avatar}.png`;
   }
 
   onNoClick(): void {

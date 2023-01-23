@@ -10,7 +10,7 @@
       (click)="selectAvatar(avatar)"
       [class.selected]="avatar === data.avatarSrc"
     >
-      <img [src]="avatar" />
+      <img [src]="getAvatar(avatar)" />
     </div>
   </section>
   <footer>

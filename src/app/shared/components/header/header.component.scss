@@ -18,6 +18,10 @@ header {
   .right {
     display: none;
     flex: 0;
+
+    #door {
+      cursor: auto;
+    }
   }
 
   @media screen and (min-width: $desktopBreakpoint) {

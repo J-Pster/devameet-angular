@@ -12,14 +12,14 @@ export class AvatarComponent {
 
   constructor(private localStorageService: LocalstorageService) {}
 
-  public obterAvatar(): string {
+  public getAvatar(): string {
     if (this.src) {
-      return this.src;
+      return `assets/images/avatars/${this.src}.png`;
     }
 
-    return (
-      this.localStorageService.getItem('avatar') ||
-      'assets/images/avatars/avatar_07_front.png'
-    );
+    const fromLocal = this.localStorageService.getItem('avatar');
+    if (!fromLocal) return 'assets/images/avatars/avatar_07_front.png';
+
+    return `assets/images/avatars/${fromLocal}.png`;
   }
 }

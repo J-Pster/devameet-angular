@@ -1,4 +1,4 @@
-<app-dashboard active="meet">
+<app-dashboard active="meets">
   <div class="userInfos" left>
     <h1>Minhas Reuniões</h1>
     <h3>Olá, {{ nome }}!</h3>
@@ -7,6 +7,8 @@
   <div left *ngIf="meetings.length > 0; else noMetings" class="meetings">
     <app-meet-snackbar
       *ngFor="let meet of meetings"
+      [selected]="selectedMeet.id === meet.id"
+      (onSelectMeet)="selectMeet($event)"
       [meet]="meet"
     ></app-meet-snackbar>
   </div>
@@ -16,4 +18,14 @@
       <p>Você ainda não possui reuniões criadas :(</p>
     </div>
   </ng-template>
+  <div *ngIf="selectedMeet.id" class="preview-container" right>
+    <app-meet-canvas
+      [onlyView]="true"
+      [objects]="objectsFromMeet"
+    ></app-meet-canvas>
+    <div class="preview">
+      <img src="assets/images/meeting-icons/door.svg" alt="Entrar na sala" />
+      <button (click)="joinMeet()">Entrar na sala</button>
+    </div>
+  </div>
 </app-dashboard>

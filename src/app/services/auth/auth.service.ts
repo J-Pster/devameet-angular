@@ -34,8 +34,6 @@ export class AuthService extends ApiService {
       credentials
     );
 
-    console.log('LOGIN RESPONSE: ', response);
-
     if (!response.token) throw new Error('Token not found!');
 
     this.localStorageService.setLogin(response);

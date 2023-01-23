@@ -31,13 +31,15 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
+    canActivate: [JwtAuthGuard],
     loadChildren: () =>
       import('./pages/meet/pages/edit-meet/edit-meet.module').then(
         (m) => m.EditMeetModule
       ),
   },
   {
-    path: 'meet/:id',
+    path: 'meet/:link',
+    canActivate: [JwtAuthGuard],
     loadChildren: () =>
       import('./pages/meet/pages/join-meet/join-meet.module').then(
         (m) => m.JoinMeetModule

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,6 +13,11 @@ import { MeetService } from 'src/app/services/meet/meet.service';
 })
 export class MeetSnackbarComponent {
   @Input() meet!: Meet;
+  @Input() selected: boolean = false;
+
+  @Output() onSelectMeet: EventEmitter<Meet> = new EventEmitter<Meet>();
+
+  mobile = window.innerWidth < 992;
 
   constructor(
     private route: Router,
@@ -20,6 +25,12 @@ export class MeetSnackbarComponent {
     private _snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
+
+  selectMeet() {
+    if (this.mobile) return;
+
+    this.onSelectMeet.emit(this.meet);
+  }
 
   copyLink() {
     const domain = document.location.hostname;

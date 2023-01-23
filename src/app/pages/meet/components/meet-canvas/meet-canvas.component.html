@@ -1,19 +1,19 @@
 <div class="container-objects" (keyup.arrow)="moveSelected($event)">
   <div class="grid">
-    <div class="line column one"></div>
-    <div class="line column two"></div>
-    <div class="line column three"></div>
-    <div class="line column four"></div>
-    <div class="line column five"></div>
-    <div class="line column six"></div>
-    <div class="line column seven"></div>
-    <div class="line row one"></div>
-    <div class="line row two"></div>
-    <div class="line row three"></div>
-    <div class="line row four"></div>
-    <div class="line row five"></div>
-    <div class="line row six"></div>
-    <div class="line row seven"></div>
+    <div *ngIf="!onlyView" class="line column one"></div>
+    <div *ngIf="!onlyView" class="line column two"></div>
+    <div *ngIf="!onlyView" class="line column three"></div>
+    <div *ngIf="!onlyView" class="line column four"></div>
+    <div *ngIf="!onlyView" class="line column five"></div>
+    <div *ngIf="!onlyView" class="line column six"></div>
+    <div *ngIf="!onlyView" class="line column seven"></div>
+    <div *ngIf="!onlyView" class="line row one"></div>
+    <div *ngIf="!onlyView" class="line row two"></div>
+    <div *ngIf="!onlyView" class="line row three"></div>
+    <div *ngIf="!onlyView" class="line row four"></div>
+    <div *ngIf="!onlyView" class="line row five"></div>
+    <div *ngIf="!onlyView" class="line row six"></div>
+    <div *ngIf="!onlyView" class="line row seven"></div>
     <img
       *ngFor="let object of objects"
       [src]="getImageFromObject(object)"
@@ -22,7 +22,7 @@
       (click)="selectObject(object)"
     />
   </div>
-  <div class="actions">
+  <div *ngIf="!onlyView" class="actions">
     <div
       (click)="removeObject.emit(selected)"
       [ngClass]="{ active: selected?._id }"

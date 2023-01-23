@@ -1,7 +1,9 @@
 <div class="meet">
   <div class="left">
     <div class="colorBar" [style.color]="meet.color"></div>
-    <h2>{{ meet.name }}</h2>
+    <h2 (click)="selectMeet()" [style.color]="selected ? meet.color : ''">
+      {{ meet.name }}
+    </h2>
   </div>
   <div class="right">
     <img

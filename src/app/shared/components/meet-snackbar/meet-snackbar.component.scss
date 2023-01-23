@@ -17,6 +17,10 @@
       color: var(--cinza03);
 
       margin-left: 8px;
+
+      @media screen and (min-width: $desktopBreakpoint) {
+        cursor: pointer;
+      }
     }
 
     .colorBar {

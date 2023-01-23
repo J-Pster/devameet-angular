@@ -219,4 +219,43 @@ export class EditMeetComponent implements OnInit {
   onCancel() {
     this.route.navigateByUrl('/');
   }
+
+  public async onSubmit() {
+    if (this.form.invalid) {
+      this._snackBar.open('Preencha todos os campos corretamente!', 'OK', {
+        duration: 2000,
+        verticalPosition: 'top',
+      });
+      return;
+    }
+
+    const formValues = this.form.value;
+    const body = {
+      name: formValues.name,
+      color: this.selectedColor,
+      objects: this.objectsFromMeet,
+    };
+
+    console.log('body', body);
+
+    this.meetService
+      .updateMeet(this.meet._id, body)
+      .then((res) => {
+        this._snackBar.open('Reunião atualizada com sucesso!', 'OK', {
+          duration: 2000,
+          verticalPosition: 'top',
+        });
+
+        setTimeout(() => {
+          this.route.navigateByUrl('/');
+        }, 2000);
+      })
+      .catch((err) => {
+        const errorMsg = err.error.message || 'Erro ao atualizar reunião!';
+        this._snackBar.open(errorMsg, 'OK', {
+          duration: 2000,
+          verticalPosition: 'top',
+        });
+      });
+  }
 }

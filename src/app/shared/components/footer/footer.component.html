@@ -2,10 +2,14 @@
   <img
     (click)="navigate('/')"
     id="home"
-    [class.active]="active === 'meet'"
+    [class.active]="active === 'meets'"
     src="assets/images/home.svg"
   />
-  <img id="door" src="assets/images/door.svg" />
+  <img
+    id="door"
+    src="assets/images/door.svg"
+    [class.active]="active === 'meet'"
+  />
   <app-avatar
     [classeCss]="getAvatarClass()"
     (click)="navigate('/profile')"

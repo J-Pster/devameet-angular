@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { HttpClient } from '@angular/common/http';
-import { Meet, MeetPost, MeetPut } from 'src/app/types/meet.type';
+import { Meet, MeetPost, MeetPut, MeetRoom } from 'src/app/types/meet.type';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,10 @@ export class MeetService extends ApiService {
     @Inject('DEVAMEET_URL_API') private _apiUrl: string
   ) {
     super(_http, _apiUrl);
+  }
+
+  getRoom(link: string): Promise<MeetRoom> {
+    return this.get(`room/${link}`);
   }
 
   getMeets(): Promise<Meet[]> {

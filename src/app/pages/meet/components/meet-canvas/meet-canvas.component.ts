@@ -15,6 +15,8 @@ import {
   styleUrls: ['./meet-canvas.component.scss'],
 })
 export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() onlyView: boolean = false;
+
   @Input() objects: any;
   @Input() selected: any;
 
@@ -61,8 +63,8 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   getObjectStyle(object: any): any {
     const style: any = {};
 
-    if (object.zIndex) {
-      style.zIndex = object.zIndex;
+    if (object.zindex) {
+      style.zIndex = object.zindex;
     }
 
     return style;
@@ -153,12 +155,14 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   selectObject(obj: any) {
+    if (this.onlyView) return;
     this.setSelected.emit(obj);
   }
 
   // Move
 
   moveSelected = (event: any) => {
+    if (this.onlyView) return;
     const selected = this.selected;
 
     const { _id } = selected;

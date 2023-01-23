@@ -41,7 +41,7 @@ export class MeetObjectPickerComponent {
       name: object,
       x: this.asset?.defaultXPosition,
       y: this.asset?.defaultYPosition,
-      zIndex: this.asset?.defaulZIndex,
+      zindex: this.asset?.defaulZIndex,
       orientation: this.asset?.defaultOrientation || '',
       selectMultiple: this.asset?.selectMultiple,
       type: this.asset?.path,
