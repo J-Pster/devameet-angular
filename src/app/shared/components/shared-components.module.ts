@@ -10,7 +10,6 @@ import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
 import { HeaderComponent } from './header/header.component';
 import { AvatarModalComponent } from './avatar-modal/avatar-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { FooterComponent } from './footer/footer.component';
 import { ColorSelectorComponent } from './color-selector/color-selector.component';
 import { ColorSelectorModalComponent } from './color-selector/color-selector-modal/color-selector-modal.component';
@@ -39,7 +38,6 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     ReactiveFormsModule,
     RouterModule,
     MatDialogModule,
-    MatFormFieldModule,
     MatSnackBarModule,
   ],
   exports: [

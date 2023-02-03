@@ -56,6 +56,12 @@ section {
       font-size: 14px;
       font-weight: 500;
     }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+      bottom: 16px;
+      left: 16px;
+      margin: 0;
+    }
   }
 }
 

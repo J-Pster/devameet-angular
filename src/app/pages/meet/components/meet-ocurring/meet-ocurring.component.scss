@@ -179,7 +179,7 @@
           border-radius: 500px;
           padding: 2px 8px;
 
-          margin-bottom: -10px;
+          margin-bottom: 2px;
 
           &.muted{
             border-color: var(--muted);
@@ -214,69 +214,69 @@
           height: 640px;
 
           .user-avatar {
-              &.column-zero {
-                  left: 1.5%
-              }
+            &.column-zero {
+              left: 2%
+            }
 
-              &.column-one {
-                  left: 14.5%
-              }
+            &.column-one {
+                left: 14.5%
+            }
 
-              &.column-two {
-                  left: 27%
-              }
+            &.column-two {
+                left: 27%
+            }
 
-              &.column-three {
-                  left: 40%
-              }
+            &.column-three {
+                left: 39.5%
+            }
 
-              &.column-four {
-                  left: 52.5%
-              }
+            &.column-four {
+                left: 52%
+            }
 
-              &.column-five {
-                  left: 65%
-              }
+            &.column-five {
+                left: 64.5%
+            }
 
-              &.column-six {
-                  left: 77.5%
-              }
+            &.column-six {
+                left: 77%
+            }
 
-              &.column-seven {
-                  left: 90%
-              }
+            &.column-seven {
+                left: 89.5%
+            }
 
-              &.row-zero {
-                  top: 0%
-              }
+            &.row-zero {
+                top: 2%
+            }
 
-              &.row-one {
-                  top: 6%
-              }
+            &.row-one {
+                top: 14.5%
+            }
 
-              &.row-two {
-                  top: 18%
-              }
+            &.row-two {
+                top: 27%
+            }
 
-              &.row-three {
-                  top: 30%
-              }
+            &.row-three {
+                top: 39.5%
+            }
 
-              &.row-four {
-                  top: 43%
-              }
+            &.row-four {
+                top: 52%
+            }
 
-              &.row-five {
-                  top: 55%
-              }
+            &.row-five {
+                top: 64.5%
+            }
 
-              &.row-six {
-                  top: 67%
-              }
+            &.row-six {
+                top: 77%
+            }
 
-              &.row-seven {
-                  top: 80%
-              }
+            &.row-seven {
+                top: 84.5%
+            }
 
               div {
                 border: 1.5px solid var(--primaria04);

@@ -32,7 +32,7 @@ export class AvatarModalComponent {
     this.data.avatarSrc = avatar;
   }
 
-  public getAvatar(avatar: string): string {
+  getAvatar(avatar: string): string {
     return `assets/images/avatars/${avatar}.png`;
   }
 

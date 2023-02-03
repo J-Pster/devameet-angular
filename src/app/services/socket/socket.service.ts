@@ -8,7 +8,7 @@ class PeerConnectionSession {
   _room: any;
   _userId: any;
   socket: any;
-  peerConnections = {} as any;
+  peerConnections: RTCPeerConnection[] = [];
   senders = [] as any;
   listeners = {} as any;
   connected = false;
@@ -22,7 +22,7 @@ class PeerConnectionSession {
     this.connected = true;
   }
 
-  addPeerConnection(id: string, stream: any, callback: any) {
+  addPeerConnection(id: any, stream: any, callback: any) {
     if (!this.peerConnections[id]) {
       console.log('creating peer:', id);
       this.peerConnections[id] = new window.RTCPeerConnection({
@@ -52,7 +52,7 @@ class PeerConnectionSession {
     }
   }
 
-  removePeerConnection(id: string) {
+  removePeerConnection(id: any) {
     if (this.peerConnections[id]) {
       this.peerConnections[id].removeEventListener(
         'connectionstatechange',

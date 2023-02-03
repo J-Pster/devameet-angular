@@ -59,68 +59,46 @@ export class EditMeetComponent implements OnInit {
 
   setObject(obj: any) {
     obj._id = this.index++;
-    if (obj.selectMultiple) {
+    let found = false;
+
+    if (!obj.selectMultiple) {
+      for (let i = 0; i < this.objectsFromMeet.length; i++) {
+        if (this.objectsFromMeet[i].type === obj.type) {
+          this.objectsFromMeet[i] = obj;
+          found = true;
+          break;
+        }
+      }
+    }
+
+    if (!found) {
       this.objectsFromMeet.push(obj);
-    } else {
-      const filtered = this.objectsFromMeet.filter(
-        (i: any) => i.type !== obj.type
-      );
-      filtered.push(obj);
-      this.objectsFromMeet = filtered;
     }
 
     this.setSelected(obj);
   }
 
   removeObject(obj: any) {
-    if (obj && obj._id) {
-      const filtered = this.objectsFromMeet.filter(
-        (o: any) => o._id !== obj._id
-      );
-      this.objectsFromMeet = filtered;
-      this.setSelected({});
-    }
+    if (!obj || !obj._id) return;
+
+    const filtered = this.objectsFromMeet.filter((o: any) => o._id !== obj._id);
+    this.objectsFromMeet = filtered;
+    this.setSelected({});
   }
 
   rotateObject(obj: any) {
     const { selected, to } = obj;
 
     if (selected?._id) {
-      if (to === 'left') {
-        switch (selected.orientation) {
-          case 'front':
-            selected.orientation = 'left';
-            break;
-          case 'left':
-            selected.orientation = 'back';
-            break;
-          case 'back':
-            selected.orientation = 'right';
-            break;
-          case 'right':
-            selected.orientation = 'front';
-            break;
-          default:
-            break;
-        }
-      } else {
-        switch (selected.orientation) {
-          case 'front':
-            selected.orientation = 'right';
-            break;
-          case 'right':
-            selected.orientation = 'back';
-            break;
-          case 'back':
-            selected.orientation = 'left';
-            break;
-          case 'left':
-            selected.orientation = 'front';
-            break;
-          default:
-            break;
-        }
-      }
+      const orientationMap: any = {
+        front: to === 'left' ? 'right' : 'left',
+        right: to === 'left' ? 'back' : 'front',
+        back: to === 'left' ? 'left' : 'right',
+        left: to === 'left' ? 'front' : 'back',
+      };
+
+      selected.orientation =
+        orientationMap[selected.orientation] || selected.orientation;
 
       this.setSelected(selected);
       this.changeObjectPosition(selected);
@@ -130,26 +108,33 @@ export class EditMeetComponent implements OnInit {
   moveObject(obj: any) {
     const { selected, to } = obj;
 
-    if (selected?._id && !selected.flexStart) {
-      switch (to) {
-        case 'up':
-          selected.y = selected.y > 0 ? selected.y - 1 : 0;
-          break;
-        case 'left':
-          selected.x = selected.x > 0 ? selected.x - 1 : 0;
-          break;
-        case 'down':
-          selected.y = selected.y < 6 ? selected.y + 1 : 6;
-          break;
-        case 'right':
-          selected.x = selected.x < 6 ? selected.x + 1 : 6;
-          break;
-        default:
-          break;
-      }
-
-      this.changeObjectPosition(selected);
+    if (!selected?._id || selected.flexStart) {
+      return;
     }
+
+    let x = selected.x;
+    let y = selected.y;
+
+    switch (to) {
+      case 'up':
+        y = y > 0 ? y - 1 : 0;
+        break;
+      case 'left':
+        x = x > 0 ? x - 1 : 0;
+        break;
+      case 'down':
+        y = y < 6 ? y + 1 : 6;
+        break;
+      case 'right':
+        x = x < 6 ? x + 1 : 6;
+        break;
+      default:
+        break;
+    }
+
+    selected.x = x;
+    selected.y = y;
+    this.changeObjectPosition(selected);
   }
 
   // Others
@@ -169,7 +154,7 @@ export class EditMeetComponent implements OnInit {
     }, 2000);
   }
 
-  loadMeeting() {
+  async loadMeeting() {
     let meetingId = this.routeActive.snapshot.paramMap.get('id');
     if (!meetingId) {
       this.notLoaded();
@@ -177,35 +162,33 @@ export class EditMeetComponent implements OnInit {
       return;
     }
 
-    this.meetService
-      .getMeet(meetingId)
-      .then((res) => {
-        if (!res) {
-          this.notLoaded();
-          return;
-        }
-
-        // Infos Básicas
-        this.form.controls['name'].setValue(res.name);
-        this.selectedColor = res.color;
-
-        this.meet = res;
-
-        // Objetos
-        this.meetService
-          .getMeetObjects(meetingId as string)
-          .then((res) => {
-            this.objectsFromMeet = res.map((e: any) => {
-              return { ...e, type: e.name.split('_')[0] };
-            });
-          })
-          .catch(() => {
-            this.notLoaded();
-          });
-      })
-      .catch(() => {
+    try {
+      const res = await this.meetService.getMeet(meetingId);
+      if (!res) {
         this.notLoaded();
-      });
+        return;
+      }
+
+      // Infos Básicas
+      this.form.controls['name'].setValue(res.name);
+      this.selectedColor = res.color;
+
+      this.meet = res;
+
+      // Objetos
+      try {
+        const meetObjects = await this.meetService.getMeetObjects(
+          meetingId as string
+        );
+        this.objectsFromMeet = meetObjects.map((e: any) => {
+          return { ...e, type: e.name.split('_')[0] };
+        });
+      } catch (error) {
+        this.notLoaded();
+      }
+    } catch (error) {
+      this.notLoaded();
+    }
   }
 
   changeColor(color: string) {

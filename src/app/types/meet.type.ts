@@ -13,6 +13,19 @@ export type MeetObject = {
   orientation: string;
 };
 
+export type MeetCompleteObject = {
+  _id: string;
+  name: string;
+  x: number;
+  y: number;
+  zindex: number;
+  orientation: string;
+  selectMultiple: boolean;
+  type: string;
+  flexStart: boolean;
+  canRotate: boolean;
+};
+
 export type MeetPut = {
   name: string;
   color: string;

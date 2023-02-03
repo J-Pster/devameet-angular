@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/local/localstorage.service';
@@ -40,59 +40,70 @@ export class JoinMeetComponent implements OnDestroy {
   // Meet
 
   joinRoom() {
-    if (this.userMediaStream) {
-      this.wsServices.connect();
-      this.wsServices.joinRoom({ link: this.link, user: this.userId });
-      this.wsServices.onUpdateUserList(async (users: any) => {
-        if (users) {
-          this.connectedUsers = users;
-          const me = users.find((u: any) => u.user === this.userId);
-          if (me) {
-            this.me = me;
-          }
-          const usersWithoutMe = users.filter(
-            (u: any) => u.user != this.userId
-          );
-          for (const user of usersWithoutMe) {
-            this.wsServices.addPeerConnection(
-              `${user.clientId}`,
-              this.userMediaStream,
-              (_stream: any) => {
-                this.audioSrcs.push({ id: user.clientId, src: _stream });
-              }
-            );
-          }
-        }
-      });
-      this.wsServices.onCallMade();
-      this.wsServices.onAddUser((user: any) => {
-        console.log('onAddUser', user);
+    if (!this.userMediaStream) return;
+
+    // Conectando em uma sala
+    this.wsServices.connect();
+    this.wsServices.joinRoom({ link: this.link, user: this.userId });
+
+    // Adicionando usuários na sala
+    this.wsServices.onUpdateUserList(async (users: any) => {
+      if (!users) return;
+
+      this.connectedUsers = users;
+      const me = users.find((u: any) => u.user === this.userId);
+
+      if (me) {
+        this.me = me;
+      }
+
+      const usersWithoutMe = users.filter((u: any) => u.user != this.userId);
+
+      for (const user of usersWithoutMe) {
         this.wsServices.addPeerConnection(
-          `${user}`,
+          `${user.clientId}`,
           this.userMediaStream,
           (_stream: any) => {
             this.audioSrcs.push({ id: user.clientId, src: _stream });
           }
         );
+      }
+    });
 
-        this.wsServices.callUser(user);
-      });
+    this.wsServices.onCallMade();
 
-      this.wsServices.onRemoveUser((socketId: any) => {
-        this.connectedUsers = this.connectedUsers.filter(
-          (user: any) => user.clientId !== socketId
-        );
-        this.wsServices.removePeerConnection(socketId);
-      });
+    // Ao adicionar um usuário
+    this.wsServices.onAddUser((user: any) => {
+      console.log('onAddUser', user);
 
-      this.wsServices.onAnswerMade((socket: any) =>
-        this.wsServices.callUser(socket)
+      this.wsServices.addPeerConnection(
+        `${user}`,
+        this.userMediaStream,
+        (_stream: any) => {
+          this.audioSrcs.push({ id: user.clientId, src: _stream });
+        }
       );
 
-      document.addEventListener('keyup', this.moveAvatar);
+      this.wsServices.callUser(user);
+    });
 
-      this.joined = true;
-    }
+    // Ao remover um usuário
+    this.wsServices.onRemoveUser((socketId: any) => {
+      this.connectedUsers = this.connectedUsers.filter(
+        (user: any) => user.clientId !== socketId
+      );
+
+      this.wsServices.removePeerConnection(socketId);
+    });
+
+    // Ao fazer uma resposta de conexão
+    this.wsServices.onAnswerMade((socket: any) =>
+      this.wsServices.callUser(socket)
+    );
+
+    document.addEventListener('keyup', this.moveAvatar);
+
+    this.joined = true;
   }
 
   copyLink() {
@@ -105,56 +116,45 @@ export class JoinMeetComponent implements OnDestroy {
 
   moveAvatar = (event: any) => {
     const user = this.me;
-    if (event && user) {
-      let payload = {
+    if (!event || !user) return;
+
+    let x = user.x;
+    let y = user.y;
+    let orientation = user.orientation;
+
+    switch (event.key) {
+      case 'ArrowUp':
+        y =
+          user.orientation === 'back' ? (user.y > 1 ? user.y - 1 : 1) : user.y;
+        orientation = 'back';
+        break;
+      case 'ArrowDown':
+        y =
+          user.orientation === 'front' ? (user.y < 7 ? user.y + 1 : 7) : user.y;
+        orientation = 'front';
+        break;
+      case 'ArrowLeft':
+        x =
+          user.orientation === 'left' ? (user.x > 0 ? user.x - 1 : 0) : user.x;
+        orientation = 'left';
+        break;
+      case 'ArrowRight':
+        x =
+          user.orientation === 'right' ? (user.x < 7 ? user.x + 1 : 7) : user.x;
+        orientation = 'right';
+        break;
+      default:
+        break;
+    }
+
+    if (x >= 0 && y >= 0 && orientation) {
+      this.wsServices.updateUserMovement({
         userId: user.user,
         link: this.link,
-      } as any;
-
-      switch (event.key) {
-        case 'ArrowUp':
-          payload.x = user.x;
-          payload.orientation = 'back';
-          if (user.orientation === 'back') {
-            payload.y = user.y > 1 ? user.y - 1 : 1;
-          } else {
-            payload.y = user.y;
-          }
-          break;
-        case 'ArrowDown':
-          payload.x = user.x;
-          payload.orientation = 'front';
-          if (user.orientation === 'front') {
-            payload.y = user.y < 7 ? user.y + 1 : 7;
-          } else {
-            payload.y = user.y;
-          }
-          break;
-        case 'ArrowLeft':
-          payload.y = user.y;
-          payload.orientation = 'left';
-          if (user.orientation === 'left') {
-            payload.x = user.x > 0 ? user.x - 1 : 0;
-          } else {
-            payload.x = user.x;
-          }
-          break;
-        case 'ArrowRight':
-          payload.y = user.y;
-          payload.orientation = 'right';
-          if (user.orientation === 'right') {
-            payload.x = user.x < 7 ? user.x + 1 : 7;
-          } else {
-            payload.x = user.x;
-          }
-          break;
-        default:
-          break;
-      }
-
-      if (payload?.x >= 0 && payload.y >= 0 && payload.orientation) {
-        this.wsServices.updateUserMovement(payload);
-      }
+        x,
+        y,
+        orientation,
+      });
     }
   };
 
@@ -195,55 +195,53 @@ export class JoinMeetComponent implements OnDestroy {
     }
   }
 
-  loadMeeting() {
-    let meetLink = this.routeActive.snapshot.paramMap.get('link');
+  async loadMeeting() {
+    const meetLink = this.routeActive.snapshot.paramMap.get('link');
     if (!meetLink) {
       this._snackBar.open('Não foi possível carregar a reunião!', 'OK', {
         duration: 2000,
         verticalPosition: 'top',
       });
-
-      setTimeout(() => {
-        this.route.navigateByUrl('/');
-      }, 2000);
-
+      setTimeout(() => this.route.navigateByUrl('/'), 2000);
       return;
     }
 
-    this.meetService
-      .getRoom(meetLink)
-      .then(async (meet) => {
-        this.name = meet.name;
-        this.link = meet.link;
-        this.color = meet.color;
-        this.objects = meet.objects.map((e: any) => {
-          return { ...e, type: e.name.split('_')[0] };
-        });
+    try {
+      const meet = await this.meetService.getRoom(meetLink);
 
-        this.userMediaStream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            width: { min: 640, ideal: 1920 },
-            height: { min: 400, ideal: 1080 },
-            aspectRatio: { ideal: 1.7777777778 },
-          },
-          audio: true,
-        });
+      this.name = meet.name;
+      this.link = meet.link;
+      this.color = meet.color;
 
-        if (document.getElementById('localVideoRef')) {
-          const videoRef: any = document.getElementById('localVideoRef');
-          videoRef.srcObject = this.userMediaStream;
-        }
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-        if (err.status === 404 || err.status === 401) {
-          this.error = true;
-        } else {
-          this._snackBar.open('Erro ao carregar a reunião!', 'OK', {
-            duration: 2000,
-            verticalPosition: 'top',
-          });
-        }
+      this.objects = meet.objects.map((obj) => ({
+        ...obj,
+        type: obj.name.split('_')[0],
+      }));
+
+      this.userMediaStream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          width: { min: 640, ideal: 1920 },
+          height: { min: 400, ideal: 1080 },
+          aspectRatio: { ideal: 1.7777777778 },
+        },
+        audio: true,
       });
+
+      const videoRef: any = document.getElementById('localVideoRef');
+      if (videoRef) {
+        videoRef.srcObject = this.userMediaStream;
+      }
+    } catch (err: any) {
+      console.error('Error: ', err);
+
+      if (err.status === 404 || err.status === 401) {
+        this.error = true;
+      } else {
+        this._snackBar.open('Erro ao carregar a reunião!', 'OK', {
+          duration: 2000,
+          verticalPosition: 'top',
+        });
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-meet-ocurring',
@@ -13,33 +13,25 @@ export class MeetOcurringComponent {
   mobile: boolean = window.innerWidth < 992;
 
   finishLoadAssets: boolean = false;
-  objectsWithWidth: any = [];
-  usersWithWidth: any = [];
 
   constructor() {}
 
   getImageFromObject(object: any) {
-    if (object?.name && object?.name.trim().length > 0) {
-      const path = `assets/images/objects/${object?.type}/${object?.name}${
-        object?.orientation ? '_' + object?.orientation : ''
-      }.png`;
-
-      return path;
+    if (!object?.name || !object?.name.trim().length) {
+      return '';
     }
 
-    return '';
+    const orientation = object.orientation ? `_${object.orientation}` : '';
+    return `assets/images/objects/${object.type}/${object.name}${orientation}.png`;
   }
 
   getImageFromAvatar(user: any) {
-    const splited = user?.avatar.split('_');
-    const avatar = `${splited[0]}_${splited[1]}`;
+    const avatarArray = user?.avatar?.split('_');
+    const avatar = avatarArray[0] + '_' + avatarArray[1];
 
-    if (avatar && avatar.trim().length > 0) {
-      const path = `assets/images/objects/avatar/${avatar}${
-        user?.orientation ? '_' + user?.orientation : ''
-      }.png`;
-
-      return path;
+    if (avatar) {
+      const orientation = user?.orientation || '';
+      return `assets/images/objects/avatar/${avatar}_${orientation}.png`;
     }
 
     return '';
@@ -48,19 +40,25 @@ export class MeetOcurringComponent {
   resizeForMobile(obj: any, style: any): any {
     if (!this.mobile) return;
 
-    const { zindex, type } = obj;
+    const { type } = obj;
+    const image = new Image();
+
+    image.src = obj.avatar
+      ? this.getImageFromAvatar(obj)
+      : this.getImageFromObject(obj);
 
     if (type === 'wall' || type === 'floor') {
-      style.width = '100%';
+      style.width = image.width * 0.5625 + 'px';
     } else {
-      style.transform = 'scale(0.6)';
+      style.width = image.width * 0.5625 + 'px';
+      style.height = image.height * 0.5625 + 'px';
     }
 
     return style;
   }
 
   getObjectStyle(obj: any): any {
-    const { zindex, type } = obj;
+    const { zindex } = obj;
 
     const style = {} as any;
 
@@ -68,86 +66,45 @@ export class MeetOcurringComponent {
       style.zIndex = zindex;
     }
 
-    const finalStyle = this.resizeForMobile(obj, style);
+    if (!this.mobile) return style;
 
-    return finalStyle;
+    return this.resizeForMobile(obj, style);
   }
 
   getClassObject(object: any): string {
     let cl = '';
+    const { flexStart, type, x, y } = object;
+
+    if (flexStart || type === 'wall' || type === 'floor') {
+      cl = `column-start${type === 'wall' ? ' row-start' : ' floor-start'}`;
+      return cl;
+    }
+
+    const classMap: any = {
+      0: 'zero',
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+    };
 
     if (
       object?.flexStart ||
       object?.type === 'wall' ||
       object?.type === 'floor'
     ) {
-      cl += 'column-start';
+      cl += 'column-start ';
 
       if (object?.type === 'wall') {
-        cl += ' row-start';
+        cl += 'row-start';
       } else {
-        cl += ' floor-start';
+        cl += 'floor-start';
       }
-
-      return cl;
-    }
-
-    switch (object.x) {
-      case 0:
-        cl += 'column-zero';
-        break;
-      case 1:
-        cl += 'column-one';
-        break;
-      case 2:
-        cl += 'column-two';
-        break;
-      case 3:
-        cl += 'column-three';
-        break;
-      case 4:
-        cl += 'column-four';
-        break;
-      case 5:
-        cl += 'column-five';
-        break;
-      case 6:
-        cl += 'column-six';
-        break;
-      case 7:
-        cl += 'column-seven';
-        break;
-      default:
-        break;
-    }
-
-    switch (object.y) {
-      case 0:
-        cl += ' row-zero';
-        break;
-      case 1:
-        cl += ' row-one';
-        break;
-      case 2:
-        cl += ' row-two';
-        break;
-      case 3:
-        cl += ' row-three';
-        break;
-      case 4:
-        cl += ' row-four';
-        break;
-      case 5:
-        cl += ' row-five';
-        break;
-      case 6:
-        cl += ' row-six';
-        break;
-      case 7:
-        cl += ' row-seven';
-        break;
-      default:
-        break;
+    } else {
+      cl += `column-${classMap[object.x]} row-${classMap[object.y]}`;
     }
 
     return cl;

@@ -8,6 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { MeetCompleteObject } from 'src/app/types/meet.type';
 
 @Component({
   selector: 'app-meet-canvas',
@@ -27,7 +28,6 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   @Output() setSelected: EventEmitter<any> = new EventEmitter<any>();
-
   @Output() removeObject: EventEmitter<any> = new EventEmitter<any>();
   @Output() rotateObject: EventEmitter<any> = new EventEmitter<any>();
   @Output() moveObject: EventEmitter<any> = new EventEmitter<any>();
@@ -45,105 +45,50 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   // Image Functions
 
   getImageFromObject(object: any) {
-    if (object?.name && object?.name.trim().length > 0) {
-      const path = `assets/images/objects/${object?.type}/${object?.name}${
-        object?.orientation ? '_' + object?.orientation : ''
-      }.png`;
-      return path;
+    if (!object?.name || !object?.name.trim().length) {
+      return '';
     }
 
-    return '';
+    const orientation = object.orientation ? `_${object.orientation}` : '';
+    return `assets/images/objects/${object.type}/${object.name}${orientation}.png`;
   }
 
   getObjectStyle(object: any): any {
-    const style: any = {};
-
-    if (object.zindex) {
-      style.zIndex = object.zindex;
-    }
-
-    return style;
+    return object.zindex ? { zIndex: object.zindex } : {};
   }
 
-  getClassObject(object: any): string {
+  getClassObject(object: MeetCompleteObject): string {
     let cl = '';
 
     if (this.selected?._id && object._id && this.selected?._id === object._id) {
       cl += 'selected ';
     }
 
+    const classMap: any = {
+      0: 'zero',
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+    };
+
     if (
       object?.flexStart ||
       object?.type === 'wall' ||
       object?.type === 'floor'
     ) {
-      cl += 'column-start';
+      cl += 'column-start ';
 
       if (object?.type === 'wall') {
-        cl += ' row-start';
+        cl += 'row-start';
       } else {
-        cl += ' floor-start';
+        cl += 'floor-start';
       }
-
-      return cl;
-    }
-
-    switch (object.x) {
-      case 0:
-        cl += 'column-zero';
-        break;
-      case 1:
-        cl += 'column-one';
-        break;
-      case 2:
-        cl += 'column-two';
-        break;
-      case 3:
-        cl += 'column-three';
-        break;
-      case 4:
-        cl += 'column-four';
-        break;
-      case 5:
-        cl += 'column-five';
-        break;
-      case 6:
-        cl += 'column-six';
-        break;
-      case 7:
-        cl += 'column-seven';
-        break;
-      default:
-        break;
-    }
-
-    switch (object.y) {
-      case 0:
-        cl += ' row-zero';
-        break;
-      case 1:
-        cl += ' row-one';
-        break;
-      case 2:
-        cl += ' row-two';
-        break;
-      case 3:
-        cl += ' row-three';
-        break;
-      case 4:
-        cl += ' row-four';
-        break;
-      case 5:
-        cl += ' row-five';
-        break;
-      case 6:
-        cl += ' row-six';
-        break;
-      case 7:
-        cl += ' row-seven';
-        break;
-      default:
-        break;
+    } else {
+      cl += `column-${classMap[object.x]} row-${classMap[object.y]}`;
     }
 
     return cl;
@@ -157,32 +102,26 @@ export class MeetCanvasComponent implements OnInit, OnDestroy, OnChanges {
   // Move
 
   moveSelected = (event: any) => {
-    if (this.onlyView) return;
+    if (this.onlyView || !this.selected || !this.selected._id || !event) return;
     const selected = this.selected;
 
-    const { _id } = selected;
-    if (event && _id) {
-      let to = '';
+    const to = (() => {
       switch (event.key) {
         case 'ArrowUp':
-          to = 'up';
-          break;
+          return 'up';
         case 'ArrowDown':
-          to = 'down';
-          break;
+          return 'down';
         case 'ArrowLeft':
-          to = 'left';
-          break;
+          return 'left';
         case 'ArrowRight':
-          to = 'right';
-          break;
+          return 'right';
         default:
-          break;
+          return '';
       }
+    })();
 
-      if (to) {
-        this.moveObject.emit({ selected, to });
-      }
+    if (to) {
+      this.moveObject.emit({ selected, to });
     }
   };
 }

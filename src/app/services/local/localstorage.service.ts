@@ -9,7 +9,7 @@ export class LocalstorageService {
   private localKeyPrefix: string = '@devameet:';
   constructor() {}
 
-  setPrefix(prefix: string): void {
+  setKeyPrefix(prefix: string): void {
     this.localKeyPrefix = prefix;
   }
 
